@@ -25,7 +25,15 @@ class UserCreateAPIView(CreateAPIView):
         request.data['username'] = user_name
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            user_obj = User.objects.create(
+                username=user_name,
+                email=request.data["email"],
+                first_name=request.data["first_name"],
+                last_name=request.data["last_name"],
+                two_factor=request.data["two_factor"]
+            )
+            user_obj.set_password(request.data["password"])
+            user_obj.save()
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
