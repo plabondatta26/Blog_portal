@@ -5,7 +5,11 @@ from .models import User
 class UserCreateSerializer(ModelSerializer):
     class Meta:
         model = User
-        exclude = [
-            'last_pass_change',
-            'auth_token',
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'two_factor',
+            'password',
         ]

@@ -8,7 +8,7 @@ from users.managers import CustomUserManager
 
 class User(BaseModel, AbstractUser):
     username = models.CharField(max_length=100, unique=True, blank=False, null=False, help_text="username of a user")
-    email = models.EmailField(unique=True, blank=False, null=False, help_text="User personal email address")
+    email = models.EmailField(unique=True, blank=True, null=True, help_text="User personal email address")
     last_pass_change = models.DateTimeField(blank=True, null=True, help_text="Last password changed date")
     auth_token = models.CharField(max_length=6, null=True, help_text="authentication code")
     two_factor = models.BooleanField(default=False, help_text='Activates two factor auth')
